@@ -92,6 +92,6 @@ endfunction
 
 
 
-vnoremap <silent> <Leader>[ : call alignment#AlignStart()<CR>
-vnoremap <silent> <Leader>= : call alignment#AlignEqualSymbol()<CR>
+vnoremap <silent> <Leader>[ : call alignment#AlignStart()<CR>gv
+vnoremap <silent> <Leader>= : call alignment#AlignEqualSymbol()<CR>gv
 
