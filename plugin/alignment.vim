@@ -1,8 +1,8 @@
 " alignment.vim - Auto align the starting position of lines or the `=` position
 " Author          Wang Chao <https://github.com/yueyoum>
 " Started         2013-1-27
-" Updated         2013-1-27
-" Version         0.1.0
+" Updated         2013-1-31
+" Version         0.1.1
 
 
 if exists("g:loaded_aligement") || &cp
@@ -24,7 +24,7 @@ function! alignment#GetSeletedLines()
 endfunction
 
 
-function! alignment#AlignStart()
+function! alignment#AlignHead()
     let s:selected_lines = alignment#GetSeletedLines()
 
     if len(s:selected_lines) == 0
@@ -58,7 +58,7 @@ endfunction
 
 
 
-function! alignment#AlignEqualSymbol()
+function! alignment#AlignChar(char)
     let s:selected_lines = alignment#GetSeletedLines()
 
     if len(s:selected_lines) == 0
@@ -71,7 +71,7 @@ function! alignment#AlignEqualSymbol()
 
     for s:_line in s:selected_lines
 
-        let s:this_equal_pos = stridx(s:_line, "=")
+        let s:this_equal_pos = stridx(s:_line, a:char)
         let s:_ = add(s:line_equal_pos, s:this_equal_pos)
 
         if s:this_equal_pos > s:max_equal_pos
@@ -92,6 +92,28 @@ endfunction
 
 
 
-vnoremap <silent> <Leader>[ : call alignment#AlignStart()<CR>gv
-vnoremap <silent> <Leader>= : call alignment#AlignEqualSymbol()<CR>gv
+function! alignment#AlignmentStart() range
+    echohl Question
+    echo "char: "
+    echohl None
+    redraw
+
+    let s:char = getchar()
+    if s:char == 27
+        " ESC
+        echo "Cancelled"
+    else
+        let s:char = nr2char(s:char)
+        if s:char == '['
+            call alignment#AlignHead()
+        else
+            call alignment#AlignChar(s:char)
+        endif
+        echo 'Done'
+    endif
+    return ''
+endfunction
+
+
+vnoremap <silent><Leader>[ : call alignment#AlignmentStart()<CR>
 
