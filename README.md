@@ -1,4 +1,4 @@
-# Aligement.vim
+# Alignment.vim
 
 ## Auto Align What You Want!
 
