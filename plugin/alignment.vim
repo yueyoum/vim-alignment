@@ -5,10 +5,10 @@
 " Version         0.2.0
 
 
-if exists("g:loaded_aligement") || &cp
+if exists("g:loaded_alignment") || &cp
     finish
 endif
-let g:loaded_aligement = 1
+let g:loaded_alignment = 1
 
 
 
